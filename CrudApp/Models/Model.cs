@@ -17,7 +17,7 @@ namespace CrudApp.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder    )
         {
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=testdb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=testdb;Trusted_Connection=True;TrustServerCertificate=True;");
         }
     }
 }
