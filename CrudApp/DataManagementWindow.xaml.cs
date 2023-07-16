@@ -40,7 +40,8 @@ namespace CrudApp
                 var addEditWindow = new AddEditKlienciWindow(_context, null);
                 if (addEditWindow.ShowDialog() == true)
                 {
-                    LoadData();
+                    // If the save operation is successful, add the new Klient to the collection
+                    Klienci.Add(addEditWindow.NewKlient);
                 }
             }
             else if (tabControl.SelectedItem == tabProdukty)

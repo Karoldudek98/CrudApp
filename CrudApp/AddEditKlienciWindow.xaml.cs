@@ -9,6 +9,8 @@ namespace CrudApp
         private Model _context;
         private Klienci _dataInstance;
 
+        public Klienci NewKlient { get; private set; } // Property to expose the newly added Klient
+
         public AddEditKlienciWindow(Model context, Klienci dataInstance)
         {
             InitializeComponent();
@@ -27,6 +29,9 @@ namespace CrudApp
 
             _context.SaveChanges();
 
+            // Expose the newly added Klient through the NewKlient property
+            NewKlient = _dataInstance;
+
             DialogResult = true;
         }
 
@@ -36,4 +41,3 @@ namespace CrudApp
         }
     }
 }
-
