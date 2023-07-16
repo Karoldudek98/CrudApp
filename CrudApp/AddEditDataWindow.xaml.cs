@@ -5,26 +5,20 @@ using System.Windows;
 using CrudApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace CrudApp
 {
-
     public partial class AddEditDataWindow<TEntity> : Window
     {
-        private void InitializeComponent()
-        {
-            System.Uri resourceLocater = new System.Uri("/CrudApp;component/AddEditDataWindow.xaml", System.UriKind.Relative);
-            System.Windows.Application.LoadComponent(this, resourceLocater);
-        }
-
         private Model _context;
         private TEntity _dataInstance;
 
         public AddEditDataWindow(Model context, TEntity dataInstance)
         {
-            InitializeComponent();
+            //InitializeComponent(); // Ensure InitializeComponent is called in the constructor
             _context = context;
             _dataInstance = dataInstance;
+
+            DataContext = _dataInstance; // Set the DataContext to the dataInstance
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)

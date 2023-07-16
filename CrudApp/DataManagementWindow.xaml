@@ -60,10 +60,10 @@
             </TabItem>
         </TabControl>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Add" Click="Add_Click" Margin="5" Height="40"/>
-            <Button Content="Edit" Click="Edit_Click" Margin="5" Height="40"/>
-            <Button Content="Remove" Click="Remove_Click" Margin="5" Height="40"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="570,186,0,-166">
+            <Button Content="Add" Click="Add_Click" Margin="5" Height="40" Width="60"/>
+            <Button Content="Edit" Click="Edit_Click" Margin="5" Height="40" Width="60"/>
+            <Button Content="Remove" Click="Remove_Click" Margin="5" Height="40" Width="60"/>
         </StackPanel>
     </Grid>
 </Window>
