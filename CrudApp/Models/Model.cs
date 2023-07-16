@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CrudApp.Models
 {
-    public class SampleModel : DbContext
+    public class Model : DbContext
     {
         public DbSet<Klienci> Klienci { get; set; }
         public DbSet<Produkty> Produkty { get; set; }
         public DbSet<SzczegolyZamowienia> SzczegolyZamowienia { get; set; }
-        public DbSet<Zamowienia> Zamowiena { get; set; }
+        public DbSet<Zamowienia> Zamowienia { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder    )
         {

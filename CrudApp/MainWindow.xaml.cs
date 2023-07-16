@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace CrudApp
 {
     /// <summary>
@@ -25,11 +26,11 @@ namespace CrudApp
         {
             InitializeComponent();
 
-            using (var context = new SampleModel())
+            //Connection check
+            using (var context = new Model())
             {
                 try
                 {
-                    // Test the database connection by querying a sample table
                     var result = context.Klienci.FirstOrDefault();
 
                     if (result != null)
@@ -46,6 +47,19 @@ namespace CrudApp
                     MessageBox.Show($"Database connection failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void OpenDataManagementWindow_Click(object sender, RoutedEventArgs e)
+        {
+            var dataManagementWindow = new DataManagementWindow();
+            dataManagementWindow.ShowDialog();
+
+            dataManagementWindow.Closed += DataManagementWindow_Closed;
+        }
+
+        private void DataManagementWindow_Closed(object sender, System.EventArgs e)
+        {
+            DataContext = new Model();
         }
     }
 }

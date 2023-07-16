@@ -16,7 +16,6 @@ namespace CrudApp.Models
 
         public System.DateTime DataZamowienia { get; set; }
 
-        // Define the navigation property for the related Klient
         public Klienci Klient { get; set; }
     }
 }
