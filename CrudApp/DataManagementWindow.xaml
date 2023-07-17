@@ -4,7 +4,7 @@
         Title="Data Management" Height="450" Width="800">
     <Grid>
         <TabControl x:Name="tabControl">
-            <!-- Tab for Klienci table -->
+
             <TabItem Header="Klienci" x:Name="tabKlienci">
                 <ListView x:Name="klienciListView" Margin="10" ItemsSource="{Binding Klienci}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
@@ -18,7 +18,7 @@
                 </ListView>
             </TabItem>
 
-            <!-- Tab for Produkty table -->
+
             <TabItem Header="Produkty" x:Name="tabProdukty">
                 <ListView x:Name="produktyListView" Margin="10" ItemsSource="{Binding Produkty}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
@@ -32,7 +32,7 @@
                 </ListView>
             </TabItem>
 
-            <!-- Tab for SzczegolyZamowienia table -->
+
             <TabItem Header="SzczegolyZamowienia" x:Name="tabSzczegolyZamowienia">
                 <ListView x:Name="szczegolyZamowieniaListView" Margin="10" ItemsSource="{Binding SzczegolyZamowienia}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
@@ -46,7 +46,7 @@
                 </ListView>
             </TabItem>
 
-            <!-- Tab for Zamowienia table -->
+
             <TabItem Header="Zamowienia" x:Name="tabZamowienia">
                 <ListView x:Name="zamowieniaListView" Margin="10" ItemsSource="{Binding Zamowienia}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>

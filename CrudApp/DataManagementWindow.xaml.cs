@@ -21,17 +21,48 @@ namespace CrudApp
             InitializeComponent();
             _context = new Model();
 
+            Klienci = new ObservableCollection<Klienci>();
+            Produkty = new ObservableCollection<Produkty>();
+            SzczegolyZamowienia = new ObservableCollection<SzczegolyZamowienia>();
+            Zamowienia = new ObservableCollection<Zamowienia>();
+
             LoadData();
             DataContext = this;
         }
 
         private void LoadData()
         {
-            Klienci = new ObservableCollection<Klienci>(_context.Klienci.ToList());
-            Produkty = new ObservableCollection<Produkty>(_context.Produkty.ToList());
-            SzczegolyZamowienia = new ObservableCollection<SzczegolyZamowienia>(_context.SzczegolyZamowienia.ToList());
-            Zamowienia = new ObservableCollection<Zamowienia>(_context.Zamowienia.ToList());
+            Klienci.Clear();
+            Produkty.Clear();
+            SzczegolyZamowienia.Clear();
+            Zamowienia.Clear();
+
+            var klienci = _context.Klienci.ToList();
+            var produkty = _context.Produkty.ToList();
+            var szczegolyZamowienia = _context.SzczegolyZamowienia.ToList();
+            var zamowienia = _context.Zamowienia.ToList();
+
+            foreach (var klient in klienci)
+            {
+                Klienci.Add(klient);
+            }
+
+            foreach (var produkt in produkty)
+            {
+                Produkty.Add(produkt);
+            }
+
+            foreach (var szczegol in szczegolyZamowienia)
+            {
+                SzczegolyZamowienia.Add(szczegol);
+            }
+
+            foreach (var zamowienie in zamowienia)
+            {
+                Zamowienia.Add(zamowienie);
+            }
         }
+
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -40,7 +71,6 @@ namespace CrudApp
                 var addEditWindow = new AddEditKlienciWindow(_context, null);
                 if (addEditWindow.ShowDialog() == true)
                 {
-                    // If the save operation is successful, add the new Klient to the collection
                     Klienci.Add(addEditWindow.NewKlient);
                 }
             }
@@ -124,24 +154,67 @@ namespace CrudApp
             {
                 var selectedKlient = SelectedItem as Klienci;
                 _context.Klienci.Remove(selectedKlient);
+
+                try
+                {
+                    _context.SaveChanges();
+                    Klienci.Remove(selectedKlient);
+                    klienciListView.Items.Refresh();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    MessageBox.Show("The selected item could not be removed due to a concurrency issue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else if (tabControl.SelectedItem == tabProdukty)
             {
                 var selectedProdukt = SelectedItem as Produkty;
                 _context.Produkty.Remove(selectedProdukt);
+
+                try
+                {
+                    _context.SaveChanges();
+                    Produkty.Remove(selectedProdukt);
+                    produktyListView.Items.Refresh();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    MessageBox.Show("The selected item could not be removed due to a concurrency issue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else if (tabControl.SelectedItem == tabSzczegolyZamowienia)
             {
                 var selectedSzczegol = SelectedItem as SzczegolyZamowienia;
                 _context.SzczegolyZamowienia.Remove(selectedSzczegol);
+
+                try
+                {
+                    _context.SaveChanges();
+                    SzczegolyZamowienia.Remove(selectedSzczegol);
+                    szczegolyZamowieniaListView.Items.Refresh();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    MessageBox.Show("The selected item could not be removed due to a concurrency issue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else if (tabControl.SelectedItem == tabZamowienia)
             {
                 var selectedZamowienie = SelectedItem as Zamowienia;
                 _context.Zamowienia.Remove(selectedZamowienie);
+
+                try
+                {
+                    _context.SaveChanges();
+                    Zamowienia.Remove(selectedZamowienie);
+                    zamowieniaListView.Items.Refresh();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    MessageBox.Show("The selected item could not be removed due to a concurrency issue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
-            _context.SaveChanges();
             LoadData();
         }
     }

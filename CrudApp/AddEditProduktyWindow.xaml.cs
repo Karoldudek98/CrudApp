@@ -1,6 +1,6 @@
-﻿using CrudApp.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
+using CrudApp.Models;
 
 namespace CrudApp
 {
@@ -9,18 +9,24 @@ namespace CrudApp
         private Model _context;
         private Produkty _dataInstance;
 
+        // AddEditProduktyWindow constructor
         public AddEditProduktyWindow(Model context, Produkty dataInstance)
         {
             InitializeComponent();
             _context = context;
             _dataInstance = dataInstance ?? new Produkty();
 
-            DataContext = new { DataInstance = _dataInstance, IsNew = dataInstance == null };
+            DataContext = _dataInstance;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            _context.Entry(_dataInstance).State = _dataInstance.ID > 0 ? EntityState.Modified : EntityState.Added;
+            // Check if the ID is 0 or not set
+            if (_dataInstance.ID == 0)
+            {
+                _context.Produkty.Add(_dataInstance); // Use Add instead of Entry
+            }
+
             _context.SaveChanges();
 
             DialogResult = true;
