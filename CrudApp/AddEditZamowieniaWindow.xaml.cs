@@ -27,7 +27,6 @@ namespace CrudApp
         {
             if (_dataInstance.ID == 0)
             {
-                // Handle the case when the ID is not set
                 MessageBox.Show("Please set a valid ID for the Zamowienia item.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -35,12 +34,10 @@ namespace CrudApp
             var existingEntity = _context.Zamowienia.Find(_dataInstance.ID);
             if (existingEntity == null)
             {
-                // If the entity with the given ID does not exist, add a new one
                 _context.Zamowienia.Add(_dataInstance);
             }
             else
             {
-                // If the entity with the given ID exists, update its properties with the values from the form
                 _context.Entry(existingEntity).CurrentValues.SetValues(_dataInstance);
             }
 
@@ -54,7 +51,6 @@ namespace CrudApp
             }
             catch (Exception ex)
             {
-                // Handle any potential exceptions during saving changes
                 MessageBox.Show($"An error occurred while saving the changes: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

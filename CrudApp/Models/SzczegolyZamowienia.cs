@@ -18,7 +18,6 @@ namespace CrudApp.Models
 
         public int Ilosc { get; set; }
 
-        // Define the navigation properties for the related Zamowienia and Produkty
         public Zamowienia Zamowienie { get; set; }
 
         public Produkty Produkt { get; set; }
