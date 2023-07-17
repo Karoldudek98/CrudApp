@@ -5,7 +5,7 @@
     <Grid>
         <StackPanel Margin="10">
             <Label Content="ID:"/>
-            <TextBox Text="{Binding ID}" IsEnabled="{Binding IsNew}" />
+            <TextBox Text="{Binding ID}"/>
             <Label Content="KlientID:"/>
             <TextBox Text="{Binding KlientID}" />
             <Label Content="DataZamowienia:"/>

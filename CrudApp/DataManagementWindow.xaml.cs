@@ -92,7 +92,7 @@ namespace CrudApp
                 var addEditWindow = new AddEditZamowieniaWindow(_context, null);
                 if (addEditWindow.ShowDialog() == true)
                 {
-                    LoadData();
+                    Zamowienia.Add(addEditWindow.NewZamowienie);
                 }
             }
         }
