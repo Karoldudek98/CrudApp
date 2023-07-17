@@ -9,19 +9,27 @@ namespace CrudApp
         private Model _context;
         private SzczegolyZamowienia _dataInstance;
 
+        public SzczegolyZamowienia NewSzczegol { get; private set; }
+
         public AddEditSzczegolyZamowieniaWindow(Model context, SzczegolyZamowienia dataInstance)
         {
             InitializeComponent();
             _context = context;
             _dataInstance = dataInstance ?? new SzczegolyZamowienia();
 
-            DataContext = new { DataInstance = _dataInstance, IsNew = dataInstance == null };
+            DataContext = _dataInstance;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            _context.Entry(_dataInstance).State = _dataInstance.ID > 0 ? EntityState.Modified : EntityState.Added;
+            if (_context.Entry(_dataInstance).State == EntityState.Detached)
+            {
+                _context.SzczegolyZamowienia.Add(_dataInstance);
+            }
+
             _context.SaveChanges();
+
+            NewSzczegol = _dataInstance;
 
             DialogResult = true;
         }

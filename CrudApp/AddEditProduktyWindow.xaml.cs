@@ -9,7 +9,7 @@ namespace CrudApp
         private Model _context;
         private Produkty _dataInstance;
 
-        // AddEditProduktyWindow constructor
+        public Produkty NewProdukt { get; private set; }
         public AddEditProduktyWindow(Model context, Produkty dataInstance)
         {
             InitializeComponent();
@@ -21,13 +21,14 @@ namespace CrudApp
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            // Check if the ID is 0 or not set
-            if (_dataInstance.ID == 0)
+            if (_context.Entry(_dataInstance).State == EntityState.Detached)
             {
-                _context.Produkty.Add(_dataInstance); // Use Add instead of Entry
+                _context.Produkty.Add(_dataInstance);
             }
 
             _context.SaveChanges();
+
+            NewProdukt = _dataInstance;
 
             DialogResult = true;
         }

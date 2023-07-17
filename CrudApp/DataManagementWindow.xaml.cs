@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CrudApp
 {
@@ -79,16 +80,12 @@ namespace CrudApp
                 var addEditWindow = new AddEditProduktyWindow(_context, null);
                 if (addEditWindow.ShowDialog() == true)
                 {
-                    LoadData();
+                    Produkty.Add(addEditWindow.NewProdukt);
                 }
             }
             else if (tabControl.SelectedItem == tabSzczegolyZamowienia)
             {
-                var addEditWindow = new AddEditSzczegolyZamowieniaWindow(_context, null);
-                if (addEditWindow.ShowDialog() == true)
-                {
-                    LoadData();
-                }
+                MessageBox.Show("You can't add items to the SzczegolyZamowienia table.");
             }
             else if (tabControl.SelectedItem == tabZamowienia)
             {
@@ -126,11 +123,7 @@ namespace CrudApp
             }
             else if (tabControl.SelectedItem == tabSzczegolyZamowienia)
             {
-                var addEditWindow = new AddEditSzczegolyZamowieniaWindow(_context, SelectedItem as SzczegolyZamowienia);
-                if (addEditWindow.ShowDialog() == true)
-                {
-                    LoadData();
-                }
+                MessageBox.Show("You can't edit items in SzczegolyZamowienia table.");
             }
             else if (tabControl.SelectedItem == tabZamowienia)
             {
